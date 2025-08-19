@@ -1,14 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
+
 import './App.css'
-
+import Form from './components/Form'
 function App() {
-  const [count, setCount] = useState(0)
-
+const [todos, setTodos] = useState([])
+useEffect(()=>{
+  console.log("todos:", todos)
+},[todos])
   return (
     <>
-       
+       <h3>Task Tracker</h3>
+      <Form setTodos={setTodos} todos={todos}></Form>
+      
     </>
   )
 }

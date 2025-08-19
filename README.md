@@ -10,4 +10,6 @@
     4. integrate react-hook-form
     5. integrate zustand
     6. integrate styled components
+    7. everything ready > learn docker, containerize
+    
     
