@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
 import { useOutletContext } from "react-router";
+import { setItem } from "../utils/localStorage";
 
 export default function Form(){
 const [todos, setTodos]= useOutletContext()
@@ -18,6 +19,7 @@ function handleSubmit(e){
     e.preventDefault();
     
     setTodos([...todos, newTodo])
+    setItem(newTodo.id, newTodo)
 
 }
     return(

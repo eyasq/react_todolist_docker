@@ -1,6 +1,12 @@
+import { useState } from "react";
 import { useOutletContext } from "react-router";
 export default function Display(){
     const [todos, setTodos] = useOutletContext()
+    const [storageTodos, setStorageTodos] = useState(() => {
+    return Object.keys(localStorage)
+      .map(key => JSON.parse(localStorage.getItem(key)))
+      .filter(todo => todo?.id != null); // filter out bad data
+  });
     function handleRemove(id){
         setTodos((prevTodos)=>prevTodos.filter((todo)=>todo.id!==id))
     }
@@ -8,6 +14,16 @@ export default function Display(){
         setTodos((prevTodos)=>
         prevTodos.map((todo)=>
         todo.id==id?{...todo, completed:!todo.completed}:todo))
+    }
+    const items = {...localStorage}
+    console.log("LocalStorage items:", items)
+    const todosFromStorage = Object.keys(localStorage).map(key => {
+    return JSON.parse(localStorage.getItem(key))
+    })
+    console.log(todosFromStorage)
+    function handleStorageDelete(id){
+        localStorage.removeItem(id)
+        setStorageTodos(prev=>prev.filter(todo=>todo.id!=id))
     }
 return(
 
@@ -26,6 +42,16 @@ return(
          </li>
         )}
     </ul>
+    <div>LocalStorage Tasks (added through normal Form component)</div>
+        <ul>
+           <ul>
+            {todosFromStorage.map(todo => (
+            <li key={todo.id}>
+                {todo.text} - {todo.important ? 'Important' : 'Not important'}
+             - <button onClick={()=>handleStorageDelete(todo.id)}>Delete from storage</button></li>
+            ))}
+        </ul>
+        </ul>
     </>
 
 )
