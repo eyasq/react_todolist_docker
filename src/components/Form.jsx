@@ -1,7 +1,9 @@
 import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
+import { useOutletContext } from "react-router";
 
-export default function Form(props){
+export default function Form(){
+const [todos, setTodos]= useOutletContext()
 const [Todo, setTodo] = useState({
     text:'',
     important: null,
@@ -14,7 +16,7 @@ function handleSubmit(e){
         id:uuidv4()
     }
     e.preventDefault();
-    const {todos, setTodos} = props
+    
     setTodos([...todos, newTodo])
 
 }

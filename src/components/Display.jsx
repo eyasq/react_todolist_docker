@@ -1,5 +1,6 @@
-
-export default function Display({todos, setTodos}){
+import { useOutletContext } from "react-router";
+export default function Display(){
+    const [todos, setTodos] = useOutletContext()
     function handleRemove(id){
         setTodos((prevTodos)=>prevTodos.filter((todo)=>todo.id!==id))
     }
