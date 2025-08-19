@@ -6,6 +6,7 @@ import App from './App.jsx'
 import Form from './components/Form.jsx'
 import Display from './components/Display.jsx'
 import HookForm from './components/HookForm.jsx'
+import AddZustand from './components/AddZustand.jsx'
 const router = createBrowserRouter([
   {
     path:"/",
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
     {
       path:"/hookform",
       element: <HookForm></HookForm>
+    },
+    {
+      path:"/zustand",
+      element: <AddZustand></AddZustand>
     }
   ]
   },

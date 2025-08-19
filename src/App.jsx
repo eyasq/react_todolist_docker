@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react'
 import { Outlet, NavLink } from 'react-router'
+import { useTodosStore } from './store/store'
 import './App.css'
 function App() {
+
 const [todos, setTodos] = useState([])
 useEffect(()=>{
   console.log("todos:", todos)
 },[todos])
+const ztodos = useTodosStore((state)=>state.todos)
+useEffect(()=>{
+  console.log("ZUSTAND TODOS: ", ztodos)
+}, [ztodos])
   return (
     <>
        <h3>Task Tracker</h3>
@@ -17,7 +23,9 @@ useEffect(()=>{
           <li><NavLink to="/add">Add</NavLink></li>
           <li><NavLink to="/display">Display</NavLink></li>
           <li><NavLink to="/">Home</NavLink></li>
-          <li><NavLink to="/hookform">HookForm - WIP</NavLink></li>
+          <li><NavLink to="/hookform">HookForm</NavLink></li>
+          <li><NavLink to="/zustand">Add From/zustand</NavLink></li>
+
 
 
         </ul>

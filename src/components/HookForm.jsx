@@ -49,7 +49,6 @@ return(
                     <label htmlFor="No">No</label>
 
             </div>
-                        <input type="hidden" {...register("completed")} value={false} name="completed" />
 
             <button>Add todo</button>
         </div>
