@@ -1,10 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router'
+import { createBrowserRouter, RouterProvider } from 'react-router'
 import './index.css'
 import App from './App.jsx'
 import Form from './components/Form.jsx'
 import Display from './components/Display.jsx'
+import HookForm from './components/HookForm.jsx'
 const router = createBrowserRouter([
   {
     path:"/",
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
     {
       path:"/display",
       element: <Display></Display>
+    },
+    {
+      path:"/hookform",
+      element: <HookForm></HookForm>
     }
   ]
   },

@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Outlet, NavLink } from 'react-router'
 import './App.css'
-import Form from './components/Form'
-import Display from './components/Display'
 function App() {
 const [todos, setTodos] = useState([])
 useEffect(()=>{
@@ -19,6 +17,7 @@ useEffect(()=>{
           <li><NavLink to="/add">Add</NavLink></li>
           <li><NavLink to="/display">Display</NavLink></li>
           <li><NavLink to="/">Home</NavLink></li>
+          <li><NavLink to="/hookform">HookForm - WIP</NavLink></li>
 
 
         </ul>
