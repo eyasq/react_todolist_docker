@@ -9,7 +9,8 @@
     3. seperate pages using Router✅
     4. integrate react-hook-form✅
     5. integrate zustand✅
-    5.5 integrate localStorage
+    5.5 integrate localStorage✅
+    5.75 add some async fetches
     6. integrate styled components
     7. everything ready > learn docker, containerize
     
