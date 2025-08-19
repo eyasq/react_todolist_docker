@@ -1,14 +1,21 @@
 import { useState } from "react"
+import { v4 as uuidv4 } from 'uuid';
+
 export default function Form(props){
 const [Todo, setTodo] = useState({
     text:'',
     important: null,
-    completed:false
+    completed:false,
+    id: null,
 })
 function handleSubmit(e){
+    const newTodo = {
+        ...Todo,
+        id:uuidv4()
+    }
     e.preventDefault();
     const {todos, setTodos} = props
-    setTodos([...todos, Todo])
+    setTodos([...todos, newTodo])
 
 }
     return(
