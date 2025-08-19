@@ -25,6 +25,9 @@ useEffect(()=>{
           <li><NavLink to="/">Home</NavLink></li>
           <li><NavLink to="/hookform">HookForm</NavLink></li>
           <li><NavLink to="/zustand">Add From/zustand</NavLink></li>
+          <li><NavLink to="/displayzustand">Display from Zustand Store</NavLink></li>
+
+          
 
 
 

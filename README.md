@@ -8,7 +8,7 @@
     2. Lift up state and add completed, important flags✅
     3. seperate pages using Router✅
     4. integrate react-hook-form✅
-    5. integrate zustand
+    5. integrate zustand✅
     6. integrate styled components
     7. everything ready > learn docker, containerize
     
