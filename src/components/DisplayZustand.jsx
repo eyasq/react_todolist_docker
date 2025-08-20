@@ -8,6 +8,17 @@ export default function DisplayZustand(){
         localStorage.removeItem(id)
         deleteTodo(id)
     }
+    function formatDate(date){
+      const date_ = new Date(date);
+      return date_.toLocaleDateString('en-GB')
+    }
+    function overDue(date){
+      const current_date = (new Date()).toLocaleString('en-GB')
+      if(current_date > date){
+        return true
+      }
+      return false
+    }
  return (
     <div className="max-w-md mx-auto mt-6 p-4 bg-white rounded-2xl shadow-md">
       <p className="text-lg font-semibold mb-4">Current Todos:</p>
@@ -18,11 +29,13 @@ export default function DisplayZustand(){
             className={`flex items-center justify-between rounded-lg px-3 py-2 shadow-sm border
               ${item.completed ? "text-green-600" : item.important ? "text-red-600" : "text-gray-800"}
             `}
-          >
+            >
+            <div className="flex flex-col">
             <span className={item.completed ? "line-through" : ""}>
-              {item.text}
+              {item.text} 
             </span>
-
+            <span className="text-xs ">Complete by: {formatDate(item.complete_by) } {overDue(formatDate(item.complete_by))&&!item.completed? "OVERDUE":""}</span>
+            </div>      
             <div className="flex items-center gap-2">
               <button
                 onClick={() => handleDelete(item.id)}
@@ -37,6 +50,7 @@ export default function DisplayZustand(){
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500"
               />
             </div>
+  
           </li>
         ))}
       </ul>

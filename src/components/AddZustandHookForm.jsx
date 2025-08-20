@@ -12,6 +12,7 @@ export default function AddZustandHookForm() {
     important: null,
     completed: false,
     id: null,
+    complete_by:null
   });
 
   function onSubmit(data) {
@@ -42,6 +43,22 @@ export default function AddZustandHookForm() {
           {...register("text", {
             required: "Todo cannot be empty.",
             minLength: { value: 4, message: "Todo must be 4 letters or more!" },
+          })}
+          className="mt-1 block w-full rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+        />
+        {errors.text && (
+          <p className="mt-1 text-sm text-red-500">{errors.text.message}</p>
+        )}
+      </div>
+       <div>
+        <label htmlFor="text" className="block text-sm font-medium text-gray-700">
+          Due By:
+        </label>
+        <input
+          type="date"
+          id="text"
+          {...register("complete_by", {
+            required: "Due date cannot be empty.",
           })}
           className="mt-1 block w-full rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
         />
