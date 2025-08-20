@@ -12,6 +12,9 @@ export default function Layout(){
     function handleSideBar(){
         setSideBarOpen(!sideBarOpen)
     }
+    function handleOuterSidebar(){
+        return sideBarOpen? handleSideBar():""
+    }
 
     return(
         <>
@@ -23,7 +26,9 @@ export default function Layout(){
         </div>
         <Navigation />
         </aside>
-            <main className="main-content">
+            <main className="main-content" onClick={handleOuterSidebar}>
+                <TbMenu className="menu-toggle" onClick={handleSideBar} />
+
                 <Outlet></Outlet>
             </main>
         </div>
