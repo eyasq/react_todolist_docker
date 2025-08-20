@@ -14,7 +14,7 @@
     8. settle on single soruce of truth✅
     9. basic styling, logo, make it an actual react webapp rather than some development feature testing thing✅
     ~~10. integrate styled components~~
-    11. add date picker field
+    11. add date picker field✅
     12. refractor
     13. everything ready > learn docker, containerize
 
