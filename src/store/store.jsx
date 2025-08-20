@@ -17,3 +17,24 @@ export const useTodosStore = create((set)=>({
 
 
 }))
+
+//state.todos to access the todos in the zustand store
+
+export const useFetchStore = create((set)=>({
+    posts:[],
+    getPostsAsync: async()=>{
+        try{
+        const posts = await fetch("https://jsonplaceholder.typicode.com/posts")
+        const res = await posts.json();
+             set((state)=>({
+            posts: [...state.posts, ...res]
+        }))
+        }catch(e){
+            console.log(e,"Something went wrong")
+        }
+   
+    },
+    
+
+
+}))

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useOutletContext } from "react-router";
 export default function Display(){
     const [todos, setTodos] = useOutletContext()
-    const [storageTodos, setStorageTodos] = useState(() => {
+    const [, setStorageTodos] = useState(() => {
     return Object.keys(localStorage)
       .map(key => JSON.parse(localStorage.getItem(key)))
       .filter(todo => todo?.id != null); // filter out bad data

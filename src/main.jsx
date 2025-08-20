@@ -8,6 +8,7 @@ import Display from './components/Display.jsx'
 import HookForm from './components/HookForm.jsx'
 import AddZustand from './components/AddZustand.jsx'
 import DisplayZustand from './components/DisplayZustand.jsx'
+import AsyncFetch from './components/Async.Fetch.jsx'
 const router = createBrowserRouter([
   {
     path:"/",
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
     {
       path:"/displayzustand",
       element: <DisplayZustand></DisplayZustand>
+    },
+    {
+      path:"/async",
+      element: <AsyncFetch/>
     }
   ]
   },

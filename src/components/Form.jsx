@@ -12,11 +12,11 @@ const [Todo, setTodo] = useState({
     id: null,
 })
 function handleSubmit(e){
+    e.preventDefault();
     const newTodo = {
         ...Todo,
         id:uuidv4()
     }
-    e.preventDefault();
     
     setTodos([...todos, newTodo])
     setItem(newTodo.id, newTodo)
