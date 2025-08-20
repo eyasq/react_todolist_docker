@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
-import { useTodosStore } from "../store/store";
+import { useTodosStore } from "../../store/store";
 
 export default function AddZustand(){
     const addTodo = useTodosStore((state)=>state.addTodo)

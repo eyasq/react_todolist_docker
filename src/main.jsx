@@ -3,31 +3,23 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router'
 import './index.css'
 import App from './App.jsx'
-import Form from './components/Form.jsx'
-import Display from './components/Display.jsx'
-import HookForm from './components/HookForm.jsx'
-import AddZustand from './components/AddZustand.jsx'
 import DisplayZustand from './components/DisplayZustand.jsx'
 import AsyncFetch from './components/Async.Fetch.jsx'
+import AddZustandHookForm from './components/AddZustandHookForm.jsx'
+import Layout from './components/Layout.jsx'
+import Home from './components/Home.jsx'
 const router = createBrowserRouter([
   {
     path:"/",
-    element: <App></App>,
-    children:[{
-      path:"/add",
-      element: <Form></Form>
-    },
-    {
-      path:"/display",
-      element: <Display></Display>
-    },
-    {
-      path:"/hookform",
-      element: <HookForm></HookForm>
-    },
+    element: <Layout></Layout>,
+    children:[
+      {
+        path:"/",
+        element: <Home></Home>
+      },
     {
       path:"/zustand",
-      element: <AddZustand></AddZustand>
+      element: <AddZustandHookForm></AddZustandHookForm>
     },
     {
       path:"/displayzustand",

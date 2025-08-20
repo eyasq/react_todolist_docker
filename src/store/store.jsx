@@ -1,6 +1,6 @@
 import {create} from 'zustand'
-
-export const useTodosStore = create((set)=>({
+import {persist} from 'zustand/middleware'
+export const useTodosStore = create(persist((set)=>({
     todos:[],
     addTodo: (todo)=>
         set((state)=>({
@@ -16,7 +16,8 @@ export const useTodosStore = create((set)=>({
     }))
 
 
-}))
+}),{name:"todos-storage"}))
+    
 
 //state.todos to access the todos in the zustand store
 
