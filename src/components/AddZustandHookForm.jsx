@@ -93,7 +93,7 @@ export default function AddZustandHookForm() {
           className="mt-1 block w-full rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
         />
         {errors.text && (
-          <p className="mt-1 text-sm text-red-500">{errors.text.message}</p>
+          <p className="mt-1 text-sm text-red-500">{errors.complete_by.message}</p>
         )}
       </div>
 

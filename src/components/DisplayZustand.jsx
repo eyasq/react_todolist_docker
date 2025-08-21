@@ -5,7 +5,6 @@ import {NavLink} from 'react-router'
 export default function DisplayZustand(){
 
     const [deleting, setDeleting]=useState(false)
-    const [checked, setChecked]=useState(false)
      async function handleDelete(id){
       setDeleting(true)
       try{
@@ -19,7 +18,8 @@ export default function DisplayZustand(){
 
      async function checkTodo(id, completed){
       const newComplete = !completed
-      setChecked(newComplete)
+
+
       try{
         await axios.put(`http://localhost:8000/api/edit/${id}`, {completed:newComplete}, 
           {headers:{
@@ -64,7 +64,7 @@ export default function DisplayZustand(){
         }
       }; fetchTodos();
       
-    },[deleting, checked])
+    },[deleting])
 
  return ( 
     <>
