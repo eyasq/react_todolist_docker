@@ -8,9 +8,7 @@ export default function DisplayZustand(){
       setDeleting(true)
       try{
         console.log("Attempting to delete record with id: ", id)
-      await axios.delete("http://localhost:8000/api/delete",{data:{
-        "id":id} 
-     })
+      await axios.delete(`http://localhost:8000/api/delete/${id}`)
      setDeleting(false)
       }catch(e){
         console.log("Something went wrong Deleting",e)
