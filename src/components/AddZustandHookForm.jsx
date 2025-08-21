@@ -4,6 +4,9 @@ import { useTodosStore } from "../store/store";
 import { useForm } from "react-hook-form";
 import axios from 'axios'
 export default function AddZustandHookForm() {
+
+  
+
   const addTodo = useTodosStore((state) => state.addTodo);
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -18,10 +21,16 @@ export default function AddZustandHookForm() {
   });
   
   async function postToDB(data){
+    const csrfData = await axios.get("http://localhost:8000/api/getCSRF", {withCredentials:true});
+    const csrfToken = csrfData.data.csrfToken
     try{
       await axios.post("http://localhost:8000/api/post", data,
       {
-      })
+        headers:{
+        "X-CSRFToken":csrfToken
+      },
+    withCredentials:true},
+    )
     }catch(e){
       console.log("Error posting data",e)
     }

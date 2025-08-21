@@ -7,10 +7,16 @@ export default function DisplayZustand(){
     const [todos, setTodos]=useState([])
     const [deleting, setDeleting]=useState(false)
      async function handleDelete(id){
+      const csrfData = await axios.get("http://localhost:8000/api/getCSRF", {withCredentials:true});
+      const csrfToken = csrfData.data.csrfToken
       setDeleting(true)
       try{
-        console.log("Attempting to delete record with id: ", id)
-      await axios.delete(`http://localhost:8000/api/delete/${id}`)
+      await axios.delete(`http://localhost:8000/api/delete/${id}`, {
+        headers:{
+          "X-CSRFToken":csrfToken
+        },
+        withCredentials:true
+      })
      setDeleting(false)
       }catch(e){
         console.log("Something went wrong Deleting",e)
@@ -19,13 +25,16 @@ export default function DisplayZustand(){
 
      async function checkTodo(id, completed){
       const newComplete = !completed
-
+      const csrfData = await axios.get("http://localhost:8000/api/getCSRF", {withCredentials:true});
+      const csrfToken = csrfData.data.csrfToken
 
       try{
         await axios.put(`http://localhost:8000/api/edit/${id}`, {completed:newComplete}, 
           {headers:{
-            "Content-Type":"application/json"
-          }}
+            "Content-Type":"application/json",
+            "X-CSRFToken":csrfToken
+          },
+        withCredentials:true}
         )
         const Ctodos = await axios.get('http://localhost:8000/api/get');
           setTodos(Ctodos.data)

@@ -6,14 +6,18 @@ import { useNavigate } from "react-router";
 export default function EditForm(){
     const navigate = useNavigate()
     async function putTodo(todo){
+      const csrfData = await axios.get("http://localhost:8000/api/getCSRF", {withCredentials:true});
+      const csrfToken = csrfData.data.csrfToken
         console.log("Attempting edit of:")
         console.log(todo)
         const id = currTodo.id
         try{
         await axios.put(`http://localhost:8000/api/edit/${id}`,todo,
             {headers:{
-                "Content-Type":"application/json"
-            }}            
+                "Content-Type":"application/json",
+                "X-CSRFToken":csrfToken
+            },
+          withCredentials:true}            
         )
         
         navigate("/displayzustand")
