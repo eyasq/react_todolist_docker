@@ -1,10 +1,22 @@
 import './styles/general.css'
 import { useState, useEffect } from 'react';
 import axios from 'axios'
+
 export default function DisplayZustand(){
-    // function handleDelete(id){
-      
-    // }
+    const [deleting, setDeleting]=useState(false)
+     async function handleDelete(id){
+      setDeleting(true)
+      try{
+        console.log("Attempting to delete record with id: ", id)
+      await axios.delete("http://localhost:8000/api/delete",{data:{
+        "id":id} 
+     })
+     setDeleting(false)
+      }catch(e){
+        console.log("Something went wrong Deleting",e)
+      }
+     }
+
     function formatDate(date){
       const date_ = new Date(date);
       return date_.toLocaleDateString('en-GB')
@@ -31,7 +43,7 @@ export default function DisplayZustand(){
         }
       }; fetchTodos();
       
-    },[])
+    },[deleting])
 
  return ( 
     <>
@@ -55,8 +67,12 @@ export default function DisplayZustand(){
               {item.notes && (
     <span className="text-xs text-gray-500 mt-1 italic">
       Notes: {item.notes}
-    </span>
-  )}
+    </span> )}
+
+              {deleting && (
+    <span className="text-xs text-gray-500 mt-1 italic">
+      Deleting.......
+    </span> )}
             </div>      
             <div className="flex items-center gap-2">
               <button
