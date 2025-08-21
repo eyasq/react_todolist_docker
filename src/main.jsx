@@ -7,6 +7,7 @@ import AsyncFetch from './components/Async.Fetch.jsx'
 import AddZustandHookForm from './components/AddZustandHookForm.jsx'
 import Layout from './components/Layout.jsx'
 import Home from './components/Home.jsx'
+import EditForm from './components/EditForm.jsx'
 const router = createBrowserRouter([
   {
     path:"/",
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
     {
       path:"/async",
       element: <AsyncFetch/>
+    },
+    {
+      path:"/edit/:id",
+      element:<EditForm></EditForm>
     }
   ]
   },

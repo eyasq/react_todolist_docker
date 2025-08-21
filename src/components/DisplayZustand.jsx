@@ -1,9 +1,11 @@
 import './styles/general.css'
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-
+import {NavLink} from 'react-router'
 export default function DisplayZustand(){
+
     const [deleting, setDeleting]=useState(false)
+    const [checked, setChecked]=useState(false)
      async function handleDelete(id){
       setDeleting(true)
       try{
@@ -14,6 +16,25 @@ export default function DisplayZustand(){
         console.log("Something went wrong Deleting",e)
       }
      }
+
+     async function checkTodo(id, completed){
+      const newComplete = !completed
+      setChecked(newComplete)
+      try{
+        await axios.put(`http://localhost:8000/api/edit/${id}`, {completed:newComplete}, 
+          {headers:{
+            "Content-Type":"application/json"
+          }}
+        )
+        
+      }
+      catch(e){
+        console.log(e, "Someting went wrong checking the todo!!")
+      }
+     }
+    
+
+
 
     function formatDate(date){
       const date_ = new Date(date);
@@ -29,6 +50,8 @@ export default function DisplayZustand(){
 
     const [loading, setLoading] = useState(true)
     const [todos, setTodos]=useState([])
+
+
     useEffect(()=>{
       const fetchTodos = async ()=>{
         try{
@@ -41,7 +64,7 @@ export default function DisplayZustand(){
         }
       }; fetchTodos();
       
-    },[deleting])
+    },[deleting, checked])
 
  return ( 
     <>
@@ -71,6 +94,9 @@ export default function DisplayZustand(){
     <span className="text-xs text-gray-500 mt-1 italic">
       Deleting.......
     </span> )}
+     <span className="text-xs text-gray-500 mt-1 italic">
+      <NavLink style={{textDecoration:"underline"}} to={`/edit/${item.id}`}>Edit</NavLink>
+    </span> 
             </div>      
             <div className="flex items-center gap-2">
               <button
@@ -81,7 +107,7 @@ export default function DisplayZustand(){
               </button>
               <input
                 type="checkbox"
-                onChange={() => checkTodo(item.id)}
+                onChange={() => checkTodo(item.id, item.completed)}
                 checked={item.completed}
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500"
               />
