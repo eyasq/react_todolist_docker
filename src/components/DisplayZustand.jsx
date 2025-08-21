@@ -86,7 +86,7 @@ export default function DisplayZustand(){
             <span className={item.completed ? "line-through" : ""}>
               {item.title} 
             </span>
-            <span className="text-xs ">Complete by: {formatDate(item.due_by) } {overDue(formatDate(item.complete_by))&&!item.completed? "OVERDUE":""}</span>
+            <span className="text-xs ">Complete by: {formatDate(item.due_by) } {overDue(formatDate(item.due_by))&&!item.completed? "OVERDUE":""}</span>
               {item.notes && (
     <span className="text-xs text-gray-500 mt-1 italic">
       Notes: {item.notes}
