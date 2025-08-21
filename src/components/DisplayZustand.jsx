@@ -35,6 +35,11 @@ export default function DisplayZustand(){
               {item.text} 
             </span>
             <span className="text-xs ">Complete by: {formatDate(item.complete_by) } {overDue(formatDate(item.complete_by))&&!item.completed? "OVERDUE":""}</span>
+              {item.notes && (
+    <span className="text-xs text-gray-500 mt-1 italic">
+      Notes: {item.notes}
+    </span>
+  )}
             </div>      
             <div className="flex items-center gap-2">
               <button

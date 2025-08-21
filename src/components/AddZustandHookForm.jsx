@@ -10,6 +10,7 @@ export default function AddZustandHookForm() {
   const [, setTodo] = useState({
     text: "",
     important: null,
+    notes:"",
     completed: false,
     id: null,
     complete_by:null
@@ -25,7 +26,7 @@ export default function AddZustandHookForm() {
 
     addTodo(newTodo);
     reset(); 
-    setTodo({ text: "", important: null, completed: false, id: null });
+    setTodo({ text: "", notes:"", important: null, completed: false, id: null });
   }
 
   return (
@@ -50,6 +51,18 @@ export default function AddZustandHookForm() {
           <p className="mt-1 text-sm text-red-500">{errors.text.message}</p>
         )}
       </div>
+      <div>
+          <label htmlFor="notes" className="block text-sm font-medium text-gray-700">
+            Notes: <span className="text-gray-400">(Optional)</span>
+          </label>
+          <textarea
+            id="notes"
+            rows="4"
+            {...register("notes")}
+            placeholder="Add any extra details..."
+            className="mt-1 block w-full rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none resize-none"
+          />
+</div>
        <div>
         <label htmlFor="text" className="block text-sm font-medium text-gray-700">
           Due By:
