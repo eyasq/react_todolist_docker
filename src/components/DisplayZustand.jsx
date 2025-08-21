@@ -1,13 +1,10 @@
-import { useTodosStore } from "../store/store";
 import './styles/general.css'
+import { useState, useEffect } from 'react';
+import axios from 'axios'
 export default function DisplayZustand(){
-    const todos = useTodosStore((state)=>state.todos)
-    const deleteTodo = useTodosStore((state)=>state.removeTodo)
-    const checkTodo = useTodosStore((state)=>state.toggleCheck)
-    function handleDelete(id){
-        localStorage.removeItem(id)
-        deleteTodo(id)
-    }
+    // function handleDelete(id){
+      
+    // }
     function formatDate(date){
       const date_ = new Date(date);
       return date_.toLocaleDateString('en-GB')
@@ -19,9 +16,29 @@ export default function DisplayZustand(){
       }
       return false
     }
- return (
+
+    const [loading, setLoading] = useState(true)
+    const [todos, setTodos]=useState([])
+    useEffect(()=>{
+      const fetchTodos = async ()=>{
+        try{
+        const todos = await axios.get("http://localhost:8000/api/get")
+        setLoading(false)
+        console.log(todos.data)
+        setTodos(todos.data)
+        }catch(e){
+          console.log("Something went wrong while fetching from DB", e)
+        }
+      }; fetchTodos();
+      
+    },[])
+
+ return ( 
+    <>
+   
     <div className="max-w-md mx-auto mt-6 p-4 bg-white rounded-2xl shadow-md">
       <p className="text-lg font-semibold mb-4">Current Todos:</p>
+       {loading && <span>Loading...</span>}
       <ul className="space-y-3">
         {todos.map((item) => (
           <li
@@ -32,9 +49,9 @@ export default function DisplayZustand(){
             >
             <div className="flex flex-col">
             <span className={item.completed ? "line-through" : ""}>
-              {item.text} 
+              {item.title} 
             </span>
-            <span className="text-xs ">Complete by: {formatDate(item.complete_by) } {overDue(formatDate(item.complete_by))&&!item.completed? "OVERDUE":""}</span>
+            <span className="text-xs ">Complete by: {formatDate(item.due_by) } {overDue(formatDate(item.complete_by))&&!item.completed? "OVERDUE":""}</span>
               {item.notes && (
     <span className="text-xs text-gray-500 mt-1 italic">
       Notes: {item.notes}
@@ -60,6 +77,7 @@ export default function DisplayZustand(){
         ))}
       </ul>
     </div>
+    </>
   );
 
 }

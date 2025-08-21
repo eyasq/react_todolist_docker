@@ -1,6 +1,6 @@
 # React Todolist app
 
-### Initial setup:
+
 
     Main page will have a form to input todos, and a div to display those todos.
     Functionalities to be added step-by-step

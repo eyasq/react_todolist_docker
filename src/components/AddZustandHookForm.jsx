@@ -2,6 +2,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useTodosStore } from "../store/store";
 import { useForm } from "react-hook-form";
+import axios from 'axios'
 export default function AddZustandHookForm() {
   const addTodo = useTodosStore((state) => state.addTodo);
 
@@ -15,16 +16,32 @@ export default function AddZustandHookForm() {
     id: null,
     complete_by:null
   });
+  
+  async function postToDB(data){
+    try{
+      await axios.post("http://localhost:8000/api/post", data,
+      {
+      })
+    }catch(e){
+      console.log("Error posting data",e)
+    }
+  }
+
 
   function onSubmit(data) {
     const newTodo = {
       ...data,
+      title: data.text,
+      due_by: data.complete_by,
       id: uuidv4(),
       completed: false, 
       important: data.important === "true" || data.important === true, 
     };
 
     addTodo(newTodo);
+    console.log("This is what the db data should look like in postToDB: \n",newTodo)
+    postToDB(newTodo)
+
     reset(); 
     setTodo({ text: "", notes:"", important: null, completed: false, id: null });
   }
