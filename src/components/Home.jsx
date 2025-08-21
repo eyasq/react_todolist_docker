@@ -30,15 +30,15 @@ const [completedTodos, setCompletedTodos]=useState([])
       <h1 className="text-2xl font-bold">Welcome back 👋</h1>
       <div className="mt-4 grid grid-cols-3 gap-4">
         <div className="p-4 rounded-lg shadow bg-green-100">
-          <p className="text-lg font-semibold">{loading?"yes":todos.length}</p>
+          <p className="text-lg font-semibold">{loading?"Loading...":todos.length}</p>
           <p>Total Todos</p>
         </div>
         <div className="p-4 rounded-lg shadow bg-blue-100">
-          <p className="text-lg font-semibold">{loading?"yes":completedTodos.length}</p>
+          <p className="text-lg font-semibold">{loading?"Loading...":completedTodos.length}</p>
           <p>Completed</p>
         </div>
         <div className="p-4 rounded-lg shadow bg-yellow-100">
-          <p className="text-lg font-semibold">{loading?" ": todos.length-completedTodos.length}</p>
+          <p className="text-lg font-semibold">{loading?"Loading...": todos.length-completedTodos.length}</p>
           <p>Pending</p>
         </div>
       </div>

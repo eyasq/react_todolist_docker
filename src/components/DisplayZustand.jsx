@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import {NavLink} from 'react-router'
 export default function DisplayZustand(){
-
+    const [loading, setLoading] = useState(true)
+    const [todos, setTodos]=useState([])
     const [deleting, setDeleting]=useState(false)
      async function handleDelete(id){
       setDeleting(true)
@@ -26,6 +27,9 @@ export default function DisplayZustand(){
             "Content-Type":"application/json"
           }}
         )
+        const Ctodos = await axios.get('http://localhost:8000/api/get');
+          setTodos(Ctodos.data)
+        
         
       }
       catch(e){
@@ -48,8 +52,6 @@ export default function DisplayZustand(){
       return false
     }
 
-    const [loading, setLoading] = useState(true)
-    const [todos, setTodos]=useState([])
 
 
     useEffect(()=>{
