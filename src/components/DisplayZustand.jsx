@@ -107,7 +107,7 @@ export default function DisplayZustand(){
     </span> )}
      <span className="text-xs text-gray-500 mt-1 italic">
       <NavLink style={{textDecoration:"underline"}} to={`/edit/${item.id}`}>Edit</NavLink>
-    </span> 
+    </span>   <span className="text-xs text-gray-500 mt-1 italic"> Owner: {item.user}</span>
             </div>      
             <div className="flex items-center gap-2">
               <button

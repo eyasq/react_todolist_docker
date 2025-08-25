@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useTodosStore } from "../store/store";
 import { useForm } from "react-hook-form";
 import axios from 'axios'
 export default function AddZustandHookForm() {
 
   
 
-  const addTodo = useTodosStore((state) => state.addTodo);
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   
@@ -27,7 +25,8 @@ export default function AddZustandHookForm() {
       await axios.post("http://localhost:8000/api/post", data,
       {
         headers:{
-        "X-CSRFToken":csrfToken
+        "X-CSRFToken":csrfToken,
+        "Content-Type":"application/json"
       },
     withCredentials:true},
     )
@@ -47,7 +46,6 @@ export default function AddZustandHookForm() {
       important: data.important === "true" || data.important === true, 
     };
 
-    addTodo(newTodo);
     console.log("This is what the db data should look like in postToDB: \n",newTodo)
     postToDB(newTodo)
 

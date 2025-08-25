@@ -44,33 +44,12 @@ return (
               checked={item.completed}
               onChange={() => handleCheck(item.id)}
             />
-            <button onClick={() => handleRemove(item.id)}>✖</button>
+            <button onClick={() => handleRemove(item.id)}>✖</button> - owner: {item.user}
           </div>
         </li>
       ))}
     </ul>
 
-    <h2>LocalStorage Todos</h2>
-    <ul className="todo-list">
-      {todosFromStorage.map((todo) => (
-        <li
-          key={todo.id}
-          className={`todo-item ${todo.completed ? "completed" : ""} ${
-            todo.important ? "important" : ""
-          }`}
-        >
-          <span>
-            {todo.text}{" "}
-            <small>
-              ({todo.important ? "Important" : "Not important"})
-            </small>
-          </span>
-          <div className="actions">
-            <button onClick={() => handleStorageDelete(todo.id)}>✖</button>
-          </div>
-        </li>
-      ))}
-    </ul>
   </div>
 );
 

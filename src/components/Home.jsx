@@ -27,7 +27,7 @@ const [completedTodos, setCompletedTodos]=useState([])
 
   return (
     <div className="home">
-      <h1 className="text-2xl font-bold">Welcome back 👋</h1>
+      <h1 className="text-2xl font-bold">Welcome Back 👋</h1>
       <div className="mt-4 grid grid-cols-3 gap-4">
         <div className="p-4 rounded-lg shadow bg-green-100">
           <p className="text-lg font-semibold">{loading?"Loading...":todos.length}</p>

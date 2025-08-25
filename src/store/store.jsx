@@ -1,41 +1,14 @@
 import {create} from 'zustand'
 import {persist} from 'zustand/middleware'
-export const useTodosStore = create(persist((set)=>({
-    todos:[],
-    addTodo: (todo)=>
-        set((state)=>({
-            todos:[...state.todos, todo]
-        })) 
-    ,
-    removeTodo:(todoId)=>set((state)=>({
-        todos:state.todos.filter(todo=>todo.id!==todoId)}))
-    ,
-    toggleCheck: (id)=>set((state)=>({
-        todos: state.todos.map((todo)=>
-        todo.id==id?{...todo, completed:!todo.completed}:todo)
-    }))
 
-
-}),{name:"todos-storage"}))
-    
 
 //state.todos to access the todos in the zustand store
 
-export const useFetchStore = create((set)=>({
-    posts:[],
-    getPostsAsync: async()=>{
-        try{
-        const posts = await fetch("https://jsonplaceholder.typicode.com/posts")
-        const res = await posts.json();
-             set((state)=>({
-            posts: [...state.posts, ...res]
-        }))
-        }catch(e){
-            console.log(e,"Something went wrong")
-        }
-   
-    },
-    
-
-
-}))
+export const userStore = create((set, get, store) => ({
+  user: {},
+  addUser: (userdata) =>
+    set((state) => ({
+      user: { ...state.user, ...userdata }
+    })),
+  reset: () => set(store.getInitialState())
+}));
