@@ -22,7 +22,7 @@ export default function AddZustandHookForm() {
     const csrfData = await axios.get("http://localhost:8000/api/getCSRF", {withCredentials:true});
     const csrfToken = csrfData.data.csrfToken
     try{
-      await axios.post("http://localhost:8000/api/post", data,
+      const res = await axios.post("http://localhost:8000/api/post", data,
       {
         headers:{
         "X-CSRFToken":csrfToken,
@@ -30,7 +30,9 @@ export default function AddZustandHookForm() {
       },
     withCredentials:true},
     )
-    }catch(e){
+        console.log("Response from backend:\n ",res)
+    }
+    catch(e){
       console.log("Error posting data",e)
     }
   }

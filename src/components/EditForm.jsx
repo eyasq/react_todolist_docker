@@ -66,7 +66,7 @@ export default function EditForm(){
         useEffect(() => {
         async function getTodo() {
             try {
-            const res = await axios.get(`http://localhost:8000/api/get/${id}`);
+            const res = await axios.get(`http://localhost:8000/api/get/${id}`, {headers:{"Content-Type":"application/json"}, withCredentials:true});
             const todo = res.data.todo
             setCurrTodo(todo);
                   reset({

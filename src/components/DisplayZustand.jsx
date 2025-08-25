@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import {NavLink} from 'react-router'
 export default function DisplayZustand(){
+    const [loggedIn, setLoggedIn]=useState(false)
     const [loading, setLoading] = useState(true)
     const [todos, setTodos]=useState([])
     const [deleting, setDeleting]=useState(false)
@@ -36,7 +37,7 @@ export default function DisplayZustand(){
           },
         withCredentials:true}
         )
-        const Ctodos = await axios.get('http://localhost:8000/api/get');
+        const Ctodos = await axios.get("http://localhost:8000/api/get", {headers:{"Content-Type":"application/json"}, withCredentials:true})
           setTodos(Ctodos.data)
         
         
@@ -66,7 +67,13 @@ export default function DisplayZustand(){
     useEffect(()=>{
       const fetchTodos = async ()=>{
         try{
-        const todos = await axios.get("http://localhost:8000/api/get")
+        const loggedIn = await axios.get("http://localhost:8000/api/user", { withCredentials:true})
+        if(loggedIn.data.auth == 'true'){setLoggedIn(true)}
+        const todos = await axios.get("http://localhost:8000/api/get", {
+          headers:{
+            "Content-Type":"application/json"
+          }, withCredentials:true
+        })
         setLoading(false)
         console.log(todos.data)
         setTodos(todos.data)
@@ -79,7 +86,7 @@ export default function DisplayZustand(){
 
  return ( 
     <>
-   
+    {loggedIn? 
     <div className="max-w-md mx-auto mt-6 p-4 bg-white rounded-2xl shadow-md">
       <p className="text-lg font-semibold mb-4">Current Todos:</p>
        {loading && <span>Loading...</span>}
@@ -128,6 +135,11 @@ export default function DisplayZustand(){
         ))}
       </ul>
     </div>
+
+    :     <div className="max-w-md mx-auto mt-6 p-4 bg-white rounded-2xl shadow-md">
+      <p className="text-lg font-semibold mb-4">Log in to add todos!</p>
+      
+    </div>}
     </>
   );
 

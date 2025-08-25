@@ -5,6 +5,7 @@ import { useState } from "react";
 import { userStore } from "../store/store";
 export default function Register(){
     const [message,setMessage]=useState('')
+    const[, setLoggedIn]=useState(false)
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const addUserData = userStore((state)=>state.addUser)
@@ -18,6 +19,7 @@ export default function Register(){
                     "Content-Type":"application/json"
                 }, withCredentials:true
             })
+            setLoggedIn(true)
             setMessage("Successfully Logged in!")
             try{
               const userData = await axios.get('http://localhost:8000/api/user/', {
